@@ -44,6 +44,18 @@ jobs:
     strategy:
       matrix:
         definition:
+          - 1-php8.2-alpine3.23
+          - 1-php8.2-alpine3.23-dev
+          - 1-php8.2-debian13
+          - 1-php8.2-debian13-dev
+          - 1-php8.3-alpine3.23
+          - 1-php8.3-alpine3.23-dev
+          - 1-php8.3-debian13
+          - 1-php8.3-debian13-dev
+          - 1-php8.4-alpine3.23
+          - 1-php8.4-alpine3.23-dev
+          - 1-php8.4-debian13
+          - 1-php8.4-debian13-dev
           - 1-php8.5-alpine3.23
           - 1-php8.5-alpine3.23-dev
           - 1-php8.5-debian13
