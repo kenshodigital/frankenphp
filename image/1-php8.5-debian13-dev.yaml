@@ -1,0 +1,138 @@
+# syntax=dhi.io/build:2-debian13
+
+name: FrankenPHP
+image: ghcr.io/kenshodigital/frankenphp
+variant: dev
+tags:
+  - 1-php8.5-debian-dev
+  - 1-php8.5-debian13-dev
+  - 1-php8.5.6-debian-dev
+  - 1-php8.5.6-debian13-dev
+  - 1.12-php8.5-debian-dev
+  - 1.12-php8.5-debian13-dev
+  - 1.12-php8.5.6-debian-dev
+  - 1.12-php8.5.6-debian13-dev
+  - 1.12.3-php8.5-debian-dev
+  - 1.12.3-php8.5-debian13-dev
+  - 1.12.3-php8.5.6-debian-dev
+  - 1.12.3-php8.5.6-debian13-dev
+
+platforms:
+  - linux/amd64
+  - linux/arm64
+
+dates:
+  release: 2026-05-16
+
+contents:
+  repositories:
+    - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
+    - deb [signed-by=/usr/share/keyrings/static-php85.asc] https://pkg.henderkes.com/api/packages/85/debian php-zts main
+  keyring:
+    - https://dhi.io/keyring/dhi-deb-els-gpg.D46852F6925E9F71.key
+    - https://github.com/kenshodigital/frankenphp/raw/refs/heads/main/key/debian/static-php85.asc
+  packages:
+    - "!gawk"
+    - "!libelogind0"
+    - "!mawk"
+    - "!original-awk"
+    - apt
+    - base-files
+    - bash
+    - ca-certificates
+    - coreutils
+    - diffutils
+    - dpkg
+    - findutils
+    - frankenphp=1.12.3+php85-1
+    - gnu-which
+    - grep
+    - gzip
+    - libc-bin
+    - mawk
+    - ncurses-bin
+    - ncurses-term
+    - perl-base
+    - php-zts-cli
+    - php-zts-devel
+    - php-zts-embed=8.5.6-1
+    - php-zts-xdebug
+    - pie-zts
+    - sed
+    - tar
+    - tzdata
+    - util-linux
+  files:
+    - url: https://getcomposer.org/download/latest-stable/composer.phar
+      checksum: sha256:a346538851988ead111d11e3cbd7d372eeba44abd0af412e09890d3c21ea6c31
+      path: /usr/local/bin/composer
+      mode: "0755"
+
+accounts:
+  root: true
+  run-as: root
+  users:
+    - name: frankenphp
+      uid: 65532
+      gid: 65532
+    - name: _apt
+      uid: 42
+      gid: 65532
+  groups:
+    - name: frankenphp
+      gid: 65532
+      members:
+        - frankenphp
+
+os-release:
+  name: Docker Hardened Images (Debian)
+  id: debian
+  version-id: "13"
+  version-codename: trixie
+  pretty-name: Docker Hardened Images/Debian GNU/Linux 13 (trixie)
+  home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
+
+work-dir: /srv
+
+environment:
+  DEBIAN_FRONTEND: noninteractive
+  SERVER_NAME: :8080
+  SERVER_ROOT: /srv/public
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+
+paths:
+  - type: file
+    path: /etc/frankenphp/Caddyfile
+    content: |
+      {
+      	skip_install_trust
+      }
+      {$SERVER_NAME} {
+      	root {$SERVER_ROOT}
+      	encode zstd br gzip
+      	php_server
+      }
+  - type: directory
+    path: /srv/public
+  - type: symlink
+    path: /srv/public/index.php
+    source: /usr/share/frankenphp/index.php
+  - type: symlink
+    path: /usr/bin/php
+    source: /usr/bin/php-zts
+
+annotations:
+  org.opencontainers.image.description: A minimal FrankenPHP image
+  org.opencontainers.image.licenses: MIT
+
+entrypoint:
+  - /usr/bin/frankenphp
+
+cmd:
+  - run
+  - --config
+  - /etc/frankenphp/Caddyfile
+
+ports:
+  - 8080/tcp
