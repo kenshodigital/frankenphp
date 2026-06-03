@@ -83,7 +83,7 @@ contents:
     - ca-certificates
     - frankenphp=1.12.3+php84-1
     - libc6
-    - php-zts-embed=8.4.21-1
+    - php-zts-embed=8.4.20-1
     - tzdata
 
 accounts:
