@@ -55,7 +55,7 @@ contents:
     - perl-base
     - php-zts-cli
     - php-zts-devel
-    - php-zts-embed=${PHP_PACKAGE_VERSION}
+    - php-zts-embed=8.4.20-1
     - php-zts-xdebug
     - pie-zts
     - sed
