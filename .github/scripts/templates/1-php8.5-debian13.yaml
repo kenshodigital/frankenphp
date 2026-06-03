@@ -1,0 +1,148 @@
+# syntax=dhi.io/build:2-debian13
+
+name: FrankenPHP
+image: ghcr.io/kenshodigital/frankenphp
+variant: runtime
+tags:
+  - 1-php8.5-debian
+  - 1-php8.5-debian13
+  - 1-php8.5.${PHP_VERSION_PATCH}-debian
+  - 1-php8.5.${PHP_VERSION_PATCH}-debian13
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5-debian
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5-debian13
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5.${PHP_VERSION_PATCH}-debian
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5.${PHP_VERSION_PATCH}-debian13
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5-debian
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5-debian13
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5.${PHP_VERSION_PATCH}-debian
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5.${PHP_VERSION_PATCH}-debian13
+
+platforms:
+  - linux/amd64
+  - linux/arm64
+
+dates:
+  release: ${RELEASE_DATE}
+
+contents:
+  repositories:
+    - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
+    - deb [signed-by=/usr/share/keyrings/static-php85.asc] https://pkg.henderkes.com/api/packages/85/debian php-zts main
+  keyring:
+    - https://dhi.io/keyring/dhi-deb-els-gpg.D46852F6925E9F71.key
+    - https://github.com/kenshodigital/frankenphp/raw/refs/heads/main/key/debian/${KEYFILE}
+  packages:
+    - "!cdebconf"
+    - "!debconf"
+    - "!dpkg"
+    - "!gawk"
+    - "!gcc-14"
+    - "!gcc-14-base"
+    - "!gmp"
+    - "!install-info"
+    - "!libacl1"
+    - "!libbz2-1.0"
+    - "!libdebian-installer"
+    - "!libdebian-installer4"
+    - "!libelogind0"
+    - "!libgmp10"
+    - "!liblzma5"
+    - "!libmd"
+    - "!libmd0"
+    - "!libmpfr6"
+    - "!libnewt0.52"
+    - "!libpcre2-8-0"
+    - "!libreadline8t64"
+    - "!libselinux"
+    - "!libselinux1"
+    - "!libsigsegv"
+    - "!libsigsegv2"
+    - "!libslang2"
+    - "!libssl3t64"
+    - "!libtextwrap"
+    - "!libtextwrap1"
+    - "!libtinfo6"
+    - "!libzstd1"
+    - "!mawk"
+    - "!mpfr4"
+    - "!ncurses"
+    - "!newt"
+    - "!openssl"
+    - "!openssl-provider-legacy"
+    - "!original-awk"
+    - "!pcre2"
+    - "!readline"
+    - "!readline-common"
+    - "!slang2"
+    - "!tar"
+    - "!texinfo"
+    - "!xz-utils"
+    - "!zlib"
+    - "!zlib1g"
+    - base-files
+    - ca-certificates
+    - frankenphp=${FRANKENPHP_PACKAGE_VERSION}
+    - libc6
+    - php-zts-embed=${PHP_PACKAGE_VERSION}
+    - tzdata
+
+accounts:
+  run-as: frankenphp
+  users:
+    - name: frankenphp
+      uid: 65532
+      gid: 65532
+  groups:
+    - name: frankenphp
+      gid: 65532
+      members:
+        - frankenphp
+
+os-release:
+  name: Docker Hardened Images (Debian)
+  id: debian
+  version-id: "13"
+  version-codename: trixie
+  pretty-name: Docker Hardened Images/Debian GNU/Linux 13 (trixie)
+  home-url: https://docker.com/products/hardened-images/
+  bug-report-url: https://docker.com/support/
+
+work-dir: /srv
+
+environment:
+  SERVER_NAME: :8080
+  SERVER_ROOT: /srv/public
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+
+paths:
+  - type: file
+    path: /etc/frankenphp/Caddyfile
+    content: |
+      {
+      	skip_install_trust
+      }
+      {$SERVER_NAME} {
+      	root {$SERVER_ROOT}
+      	encode zstd br gzip
+      	php_server
+      }
+  - type: directory
+    path: /srv/public
+  - type: symlink
+    path: /srv/public/index.php
+    source: /usr/share/frankenphp/index.php
+
+annotations:
+  org.opencontainers.image.description: A minimal FrankenPHP image
+  org.opencontainers.image.licenses: MIT
+
+entrypoint:
+  - /usr/bin/frankenphp
+
+cmd:
+  - run
+  - --config
+  - /etc/frankenphp/Caddyfile
+
+ports:
+  - 8080/tcp
