@@ -45,6 +45,7 @@ contents:
     - dpkg
     - findutils
     - frankenphp=${FRANKENPHP_PACKAGE_VERSION}
+    - frankenphp-debuginfo=${FRANKENPHP_PACKAGE_VERSION}
     - gnu-which
     - grep
     - gzip
@@ -56,6 +57,7 @@ contents:
     - php-zts-cli
     - php-zts-devel
     - php-zts-embed=${PHP_PACKAGE_VERSION}
+    - php-zts-embed-debuginfo=${PHP_PACKAGE_VERSION}
     - php-zts-xdebug
     - pie-zts
     - sed
