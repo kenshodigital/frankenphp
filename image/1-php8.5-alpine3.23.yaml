@@ -6,23 +6,23 @@ variant: runtime
 tags:
   - 1-php8.5-alpine
   - 1-php8.5-alpine3.23
-  - 1-php8.5.6-alpine
-  - 1-php8.5.6-alpine3.23
+  - 1-php8.5.7-alpine
+  - 1-php8.5.7-alpine3.23
   - 1.12-php8.5-alpine
   - 1.12-php8.5-alpine3.23
-  - 1.12-php8.5.6-alpine
-  - 1.12-php8.5.6-alpine3.23
-  - 1.12.3-php8.5-alpine
-  - 1.12.3-php8.5-alpine3.23
-  - 1.12.3-php8.5.6-alpine
-  - 1.12.3-php8.5.6-alpine3.23
+  - 1.12-php8.5.7-alpine
+  - 1.12-php8.5.7-alpine3.23
+  - 1.12.4-php8.5-alpine
+  - 1.12.4-php8.5-alpine3.23
+  - 1.12.4-php8.5.7-alpine
+  - 1.12.4-php8.5.7-alpine3.23
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-05-16
+  release: 2026-06-05
 
 contents:
   repositories:
@@ -37,8 +37,8 @@ contents:
     - alpine-baselayout-data
     - busybox
     - ca-certificates-bundle
-    - frankenphp=1.12.3p85-r0
-    - php-zts-embed=8.5.6-r0
+    - frankenphp=1.12.4p85-r0
+    - php-zts-embed=8.5.7-r0
     - tzdata
 
 accounts:

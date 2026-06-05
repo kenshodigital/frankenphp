@@ -6,23 +6,23 @@ variant: runtime
 tags:
   - 1-php8.4-debian
   - 1-php8.4-debian13
-  - 1-php8.4.21-debian
-  - 1-php8.4.21-debian13
+  - 1-php8.4.22-debian
+  - 1-php8.4.22-debian13
   - 1.12-php8.4-debian
   - 1.12-php8.4-debian13
-  - 1.12-php8.4.21-debian
-  - 1.12-php8.4.21-debian13
-  - 1.12.3-php8.4-debian
-  - 1.12.3-php8.4-debian13
-  - 1.12.3-php8.4.21-debian
-  - 1.12.3-php8.4.21-debian13
+  - 1.12-php8.4.22-debian
+  - 1.12-php8.4.22-debian13
+  - 1.12.4-php8.4-debian
+  - 1.12.4-php8.4-debian13
+  - 1.12.4-php8.4.22-debian
+  - 1.12.4-php8.4.22-debian13
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-05-16
+  release: 2026-06-05
 
 contents:
   repositories:
@@ -81,7 +81,7 @@ contents:
     - "!zlib1g"
     - base-files
     - ca-certificates
-    - frankenphp=1.12.3+php84-1
+    - frankenphp=1.12.4+php84-1
     - libc6
     - php-zts-embed=8.4.20-1
     - tzdata

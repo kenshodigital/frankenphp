@@ -6,23 +6,23 @@ variant: dev
 tags:
   - 1-php8.5-debian-dev
   - 1-php8.5-debian13-dev
-  - 1-php8.5.6-debian-dev
-  - 1-php8.5.6-debian13-dev
+  - 1-php8.5.7-debian-dev
+  - 1-php8.5.7-debian13-dev
   - 1.12-php8.5-debian-dev
   - 1.12-php8.5-debian13-dev
-  - 1.12-php8.5.6-debian-dev
-  - 1.12-php8.5.6-debian13-dev
-  - 1.12.3-php8.5-debian-dev
-  - 1.12.3-php8.5-debian13-dev
-  - 1.12.3-php8.5.6-debian-dev
-  - 1.12.3-php8.5.6-debian13-dev
+  - 1.12-php8.5.7-debian-dev
+  - 1.12-php8.5.7-debian13-dev
+  - 1.12.4-php8.5-debian-dev
+  - 1.12.4-php8.5-debian13-dev
+  - 1.12.4-php8.5.7-debian-dev
+  - 1.12.4-php8.5.7-debian13-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-05-16
+  release: 2026-06-05
 
 contents:
   repositories:
@@ -44,8 +44,8 @@ contents:
     - diffutils
     - dpkg
     - findutils
-    - frankenphp=1.12.3+php85-1
-    - frankenphp-debuginfo=1.12.3+php85-1
+    - frankenphp=1.12.4+php85-1
+    - frankenphp-debuginfo=1.12.4+php85-1
     - gnu-which
     - grep
     - gzip
@@ -56,8 +56,8 @@ contents:
     - perl-base
     - php-zts-cli
     - php-zts-devel
-    - php-zts-embed=8.5.6-1
-    - php-zts-embed-debuginfo=8.5.6-1
+    - php-zts-embed=8.5.7-1
+    - php-zts-embed-debuginfo=8.5.7-1
     - php-zts-xdebug
     - pie-zts
     - sed
