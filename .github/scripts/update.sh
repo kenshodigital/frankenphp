@@ -21,7 +21,7 @@ for template in .github/scripts/templates/*.yaml; do
 
   # Fetches keyfile for package repository.
   if [[ "${base}" == "alpine" ]]; then
-    keyfile="$(
+    KEYFILE="$(
       curl \
         --clobber \
         --fail \
@@ -30,17 +30,20 @@ for template in .github/scripts/templates/*.yaml; do
         --remote-name \
         --silent \
         --write-out '%{filename_effective}' \
-        "https://pkg.henderkes.com/api/packages/${php_version}/alpine/key"
+        "https://pkg.henderkes.com/api/packages/${php_version}/alpine/key" \
+        | sed 's|^key/alpine/||'
     )"
-    KEYFILE="${keyfile#key/alpine/}"
-  else
-    curl \
-      --fail \
-      --output "key/debian/static-php${php_version}.asc" \
-      --silent \
-      "https://pkg.henderkes.com/api/packages/${php_version}/debian/repository.key"
-
-    KEYFILE="static-php${php_version}.asc"
+  fi
+  if [[ "${base}" == "debian" ]]; then
+    KEYFILE="$(
+      curl \
+        --fail \
+        --output "key/debian/static-php${php_version}.asc" \
+        --silent \
+        --write-out '%{filename_effective}' \
+        "https://pkg.henderkes.com/api/packages/${php_version}/debian/repository.key" \
+        | sed 's|^key/debian/||'
+    )"
   fi
 
   # Fetches FrankenPHP package info from package repository.
