@@ -61,8 +61,8 @@ contents:
     - perl-base
     - php-zts-cli
     - php-zts-devel
-    - php-zts-embed=8.4.20-1
-    - php-zts-embed-debuginfo=8.4.20-1
+    - php-zts-embed=8.4.22-1
+    - php-zts-embed-debuginfo=8.4.22-1
     - php-zts-xdebug
     - pie-zts
     - sed
