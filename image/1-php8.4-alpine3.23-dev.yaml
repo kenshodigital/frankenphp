@@ -24,6 +24,11 @@ platforms:
 dates:
   release: 2026-06-05
 
+vars:
+  RELEASE_DATE: 2026-06-05
+  FRANKENPHP_PACKAGE_VERSION: 1.12.4p84-r0
+  PHP_PACKAGE_VERSION: 8.4.22-r0
+
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.23/main
