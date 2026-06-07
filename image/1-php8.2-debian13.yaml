@@ -12,17 +12,17 @@ tags:
   - 1.12-php8.2-debian13
   - 1.12-php8.2.31-debian
   - 1.12-php8.2.31-debian13
-  - 1.12.3-php8.2-debian
-  - 1.12.3-php8.2-debian13
-  - 1.12.3-php8.2.31-debian
-  - 1.12.3-php8.2.31-debian13
+  - 1.12.4-php8.2-debian
+  - 1.12.4-php8.2-debian13
+  - 1.12.4-php8.2.31-debian
+  - 1.12.4-php8.2.31-debian13
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-05-16
+  release: 2026-06-06
 
 contents:
   repositories:
@@ -81,7 +81,7 @@ contents:
     - "!zlib1g"
     - base-files
     - ca-certificates
-    - frankenphp=1.12.3+php82-1
+    - frankenphp=1.12.4+php82-1
     - libc6
     - php-zts-embed=8.2.31-1
     - tzdata
