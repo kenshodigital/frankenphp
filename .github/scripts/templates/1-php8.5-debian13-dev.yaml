@@ -24,6 +24,11 @@ platforms:
 dates:
   release: ${RELEASE_DATE}
 
+vars:
+  RELEASE_DATE: ${RELEASE_DATE}
+  FRANKENPHP_PACKAGE_VERSION: ${FRANKENPHP_PACKAGE_VERSION}
+  PHP_PACKAGE_VERSION: ${PHP_PACKAGE_VERSION}
+
 contents:
   repositories:
     - deb [signed-by=/usr/share/keyrings/dhi-deb-main.gpg] http://dhi.io/deb/debian/main trixie main
