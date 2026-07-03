@@ -6,28 +6,28 @@ variant: runtime
 tags:
   - 1-php8.4-debian
   - 1-php8.4-debian13
-  - 1-php8.4.22-debian
-  - 1-php8.4.22-debian13
+  - 1-php8.4.23-debian
+  - 1-php8.4.23-debian13
   - 1.12-php8.4-debian
   - 1.12-php8.4-debian13
-  - 1.12-php8.4.22-debian
-  - 1.12-php8.4.22-debian13
+  - 1.12-php8.4.23-debian
+  - 1.12-php8.4.23-debian13
   - 1.12.4-php8.4-debian
   - 1.12.4-php8.4-debian13
-  - 1.12.4-php8.4.22-debian
-  - 1.12.4-php8.4.22-debian13
+  - 1.12.4-php8.4.23-debian
+  - 1.12.4-php8.4.23-debian13
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-06-05
+  release: 2026-07-03
 
 vars:
-  RELEASE_DATE: 2026-06-05
+  RELEASE_DATE: 2026-07-03
   FRANKENPHP_PACKAGE_VERSION: 1.12.4+php84-1
-  PHP_PACKAGE_VERSION: 8.4.22-1
+  PHP_PACKAGE_VERSION: 8.4.23-1
 
 contents:
   repositories:
@@ -89,7 +89,7 @@ contents:
     - frankenphp=1.12.4+php84-1
     - libc6
     - libstdc++6
-    - php-zts-embed=8.4.22-1
+    - php-zts-embed=8.4.23-1
     - tzdata
 
 accounts:
