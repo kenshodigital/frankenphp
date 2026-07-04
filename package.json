@@ -4,6 +4,6 @@
 		"format": "oxfmt"
 	},
 	"devDependencies": {
-		"oxfmt": "^0.52"
+		"oxfmt": "^0.57"
 	}
 }
