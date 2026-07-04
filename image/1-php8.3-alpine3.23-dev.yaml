@@ -6,28 +6,28 @@ variant: dev
 tags:
   - 1-php8.3-alpine-dev
   - 1-php8.3-alpine3.23-dev
-  - 1-php8.3.31-alpine-dev
-  - 1-php8.3.31-alpine3.23-dev
+  - 1-php8.3.32-alpine-dev
+  - 1-php8.3.32-alpine3.23-dev
   - 1.12-php8.3-alpine-dev
   - 1.12-php8.3-alpine3.23-dev
-  - 1.12-php8.3.31-alpine-dev
-  - 1.12-php8.3.31-alpine3.23-dev
+  - 1.12-php8.3.32-alpine-dev
+  - 1.12-php8.3.32-alpine3.23-dev
   - 1.12.4-php8.3-alpine-dev
   - 1.12.4-php8.3-alpine3.23-dev
-  - 1.12.4-php8.3.31-alpine-dev
-  - 1.12.4-php8.3.31-alpine3.23-dev
+  - 1.12.4-php8.3.32-alpine-dev
+  - 1.12.4-php8.3.32-alpine3.23-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-06-05
+  release: 2026-07-03
 
 vars:
-  RELEASE_DATE: 2026-06-05
+  RELEASE_DATE: 2026-07-03
   FRANKENPHP_PACKAGE_VERSION: 1.12.4p83-r0
-  PHP_PACKAGE_VERSION: 8.3.31-r0
+  PHP_PACKAGE_VERSION: 8.3.32-r0
 
 contents:
   repositories:
@@ -46,7 +46,7 @@ contents:
     - frankenphp=1.12.4p83-r0
     - php-zts-cli
     - php-zts-devel
-    - php-zts-embed=8.3.31-r0
+    - php-zts-embed=8.3.32-r0
     - php-zts-xdebug
     - pie-zts
     - tzdata

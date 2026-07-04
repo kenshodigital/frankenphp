@@ -6,28 +6,28 @@ variant: runtime
 tags:
   - 1-php8.4-alpine
   - 1-php8.4-alpine3.23
-  - 1-php8.4.22-alpine
-  - 1-php8.4.22-alpine3.23
+  - 1-php8.4.23-alpine
+  - 1-php8.4.23-alpine3.23
   - 1.12-php8.4-alpine
   - 1.12-php8.4-alpine3.23
-  - 1.12-php8.4.22-alpine
-  - 1.12-php8.4.22-alpine3.23
+  - 1.12-php8.4.23-alpine
+  - 1.12-php8.4.23-alpine3.23
   - 1.12.4-php8.4-alpine
   - 1.12.4-php8.4-alpine3.23
-  - 1.12.4-php8.4.22-alpine
-  - 1.12.4-php8.4.22-alpine3.23
+  - 1.12.4-php8.4.23-alpine
+  - 1.12.4-php8.4.23-alpine3.23
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-06-05
+  release: 2026-07-03
 
 vars:
-  RELEASE_DATE: 2026-06-05
+  RELEASE_DATE: 2026-07-03
   FRANKENPHP_PACKAGE_VERSION: 1.12.4p84-r0
-  PHP_PACKAGE_VERSION: 8.4.22-r0
+  PHP_PACKAGE_VERSION: 8.4.23-r0
 
 contents:
   repositories:
@@ -43,7 +43,7 @@ contents:
     - busybox
     - ca-certificates-bundle
     - frankenphp=1.12.4p84-r0
-    - php-zts-embed=8.4.22-r0
+    - php-zts-embed=8.4.23-r0
     - tzdata
 
 accounts:
