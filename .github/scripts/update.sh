@@ -91,19 +91,19 @@ for template in .github/scripts/templates/*.yaml; do
 
   # Gets previous versions from existing definition.
   RELEASE_DATE="$(
-    grep '^[[:space:]]*RELEASE_DATE:' "image/${definition}" \
+    grep '^[[:space:]]*RELEASE_DATE:' "image/${definition}" 2>/dev/null \
       | cut -d: -f2- \
       | xargs \
       || true
   )"
   FRANKENPHP_PACKAGE_VERSION="$(
-    grep '^[[:space:]]*FRANKENPHP_PACKAGE_VERSION:' "image/${definition}" \
+    grep '^[[:space:]]*FRANKENPHP_PACKAGE_VERSION:' "image/${definition}" 2>/dev/null \
       | cut -d: -f2- \
       | xargs \
       || true
   )"
   PHP_PACKAGE_VERSION="$(
-    grep '^[[:space:]]*PHP_PACKAGE_VERSION:' "image/${definition}" \
+    grep '^[[:space:]]*PHP_PACKAGE_VERSION:' "image/${definition}" 2>/dev/null \
       | cut -d: -f2- \
       | xargs \
       || true
