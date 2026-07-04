@@ -4,17 +4,11 @@ name: FrankenPHP
 image: ghcr.io/kenshodigital/frankenphp
 variant: dev
 tags:
-  - 1-php8.2-alpine-dev
   - 1-php8.2-alpine3.23-dev
-  - 1-php8.2.32-alpine-dev
   - 1-php8.2.32-alpine3.23-dev
-  - 1.12-php8.2-alpine-dev
   - 1.12-php8.2-alpine3.23-dev
-  - 1.12-php8.2.32-alpine-dev
   - 1.12-php8.2.32-alpine3.23-dev
-  - 1.12.4-php8.2-alpine-dev
   - 1.12.4-php8.2-alpine3.23-dev
-  - 1.12.4-php8.2.32-alpine-dev
   - 1.12.4-php8.2.32-alpine3.23-dev
 
 platforms:

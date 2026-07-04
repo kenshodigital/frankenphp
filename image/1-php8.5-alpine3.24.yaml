@@ -1,15 +1,21 @@
-# syntax=dhi.io/build:2-alpine3.23
+# syntax=dhi.io/build:2-alpine3.24
 
 name: FrankenPHP
 image: ghcr.io/kenshodigital/frankenphp
 variant: runtime
 tags:
-  - 1-php8.4-alpine3.23
-  - 1-php8.4.23-alpine3.23
-  - 1.12-php8.4-alpine3.23
-  - 1.12-php8.4.23-alpine3.23
-  - 1.12.4-php8.4-alpine3.23
-  - 1.12.4-php8.4.23-alpine3.23
+  - 1-php8.5-alpine
+  - 1-php8.5-alpine3.24
+  - 1-php8.5.8-alpine
+  - 1-php8.5.8-alpine3.24
+  - 1.12-php8.5-alpine
+  - 1.12-php8.5-alpine3.24
+  - 1.12-php8.5.8-alpine
+  - 1.12-php8.5.8-alpine3.24
+  - 1.12.4-php8.5-alpine
+  - 1.12.4-php8.5-alpine3.24
+  - 1.12.4-php8.5.8-alpine
+  - 1.12.4-php8.5.8-alpine3.24
 
 platforms:
   - linux/amd64
@@ -20,24 +26,22 @@ dates:
 
 vars:
   RELEASE_DATE: 2026-07-03
-  FRANKENPHP_PACKAGE_VERSION: 1.12.4p84-r0
-  PHP_PACKAGE_VERSION: 8.4.23-r0
+  FRANKENPHP_PACKAGE_VERSION: 1.12.4p85-r0
+  PHP_PACKAGE_VERSION: 8.5.8-r0
 
 contents:
   repositories:
-    - https://dhi.io/apk/alpine/v3.23/main
-    - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
-    - https://dl-cdn.alpinelinux.org/alpine/v3.23/community
-    - https://pkg.henderkes.com/api/packages/84/alpine/main/php-zts
+    - https://dhi.io/apk/alpine/v3.24/main
+    - https://pkg.henderkes.com/api/packages/85/alpine/main/php-zts
   keyring:
     - https://dhi.io/keyring/dhi-apk@docker-0F81AD7700D99184.rsa.pub
-    - https://github.com/kenshodigital/frankenphp/raw/refs/heads/main/key/alpine/84@e8d0b922f3fc6ca07c7c4aeac964ae300afe70bf48771bf57cbd92a2879f3940.rsa.pub
+    - https://github.com/kenshodigital/frankenphp/raw/refs/heads/main/key/alpine/85@ef7a77c1ac54ba016175accd4020691a9b591c690c19cb4f98c11cef12e4403c.rsa.pub
   packages:
     - alpine-baselayout-data
     - busybox
     - ca-certificates-bundle
-    - frankenphp=1.12.4p84-r0
-    - php-zts-embed=8.4.23-r0
+    - frankenphp=1.12.4p85-r0
+    - php-zts-embed=8.5.8-r0
     - tzdata
 
 accounts:
@@ -55,8 +59,8 @@ accounts:
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
-  version-id: "3.23"
-  pretty-name: Docker Hardened Images/Alpine Linux v3.23
+  version-id: "3.24"
+  pretty-name: Docker Hardened Images/Alpine Linux v3.24
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 

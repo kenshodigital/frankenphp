@@ -4,17 +4,11 @@ name: FrankenPHP
 image: ghcr.io/kenshodigital/frankenphp
 variant: runtime
 tags:
-  - 1-php8.5-alpine
   - 1-php8.5-alpine3.23
-  - 1-php8.5.8-alpine
   - 1-php8.5.8-alpine3.23
-  - 1.12-php8.5-alpine
   - 1.12-php8.5-alpine3.23
-  - 1.12-php8.5.8-alpine
   - 1.12-php8.5.8-alpine3.23
-  - 1.12.4-php8.5-alpine
   - 1.12.4-php8.5-alpine3.23
-  - 1.12.4-php8.5.8-alpine
   - 1.12.4-php8.5.8-alpine3.23
 
 platforms:
