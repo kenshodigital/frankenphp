@@ -4,17 +4,11 @@ name: FrankenPHP
 image: ghcr.io/kenshodigital/frankenphp
 variant: runtime
 tags:
-  - 1-php8.5-alpine
   - 1-php8.5-alpine3.23
-  - 1-php8.5.${PHP_VERSION_PATCH}-alpine
   - 1-php8.5.${PHP_VERSION_PATCH}-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5-alpine
   - 1.${FRANKENPHP_VERSION_MINOR}-php8.5-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5.${PHP_VERSION_PATCH}-alpine
   - 1.${FRANKENPHP_VERSION_MINOR}-php8.5.${PHP_VERSION_PATCH}-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5-alpine
   - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5.${PHP_VERSION_PATCH}-alpine
   - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5.${PHP_VERSION_PATCH}-alpine3.23
 
 platforms:

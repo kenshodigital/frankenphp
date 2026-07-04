@@ -1,15 +1,21 @@
-# syntax=dhi.io/build:2-alpine3.23
+# syntax=dhi.io/build:2-alpine3.24
 
 name: FrankenPHP
 image: ghcr.io/kenshodigital/frankenphp
-variant: runtime
+variant: dev
 tags:
-  - 1-php8.2-alpine3.23
-  - 1-php8.2.${PHP_VERSION_PATCH}-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}-php8.2-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}-php8.2.${PHP_VERSION_PATCH}-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.2-alpine3.23
-  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.2.${PHP_VERSION_PATCH}-alpine3.23
+  - 1-php8.5-alpine-dev
+  - 1-php8.5-alpine3.24-dev
+  - 1-php8.5.${PHP_VERSION_PATCH}-alpine-dev
+  - 1-php8.5.${PHP_VERSION_PATCH}-alpine3.24-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5-alpine-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5-alpine3.24-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5.${PHP_VERSION_PATCH}-alpine-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}-php8.5.${PHP_VERSION_PATCH}-alpine3.24-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5-alpine-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5-alpine3.24-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5.${PHP_VERSION_PATCH}-alpine-dev
+  - 1.${FRANKENPHP_VERSION_MINOR}.${FRANKENPHP_VERSION_PATCH}-php8.5.${PHP_VERSION_PATCH}-alpine3.24-dev
 
 platforms:
   - linux/amd64
@@ -25,23 +31,32 @@ vars:
 
 contents:
   repositories:
-    - https://dhi.io/apk/alpine/v3.23/main
-    - https://dl-cdn.alpinelinux.org/alpine/v3.23/main
-    - https://dl-cdn.alpinelinux.org/alpine/v3.23/community
-    - https://pkg.henderkes.com/api/packages/82/alpine/main/php-zts
+    - https://dhi.io/apk/alpine/v3.24/main
+    - https://pkg.henderkes.com/api/packages/85/alpine/main/php-zts
   keyring:
     - https://dhi.io/keyring/dhi-apk@docker-0F81AD7700D99184.rsa.pub
     - https://github.com/kenshodigital/frankenphp/raw/refs/heads/main/key/alpine/${KEYFILE}
   packages:
     - alpine-baselayout-data
+    - apk-tools
     - busybox
     - ca-certificates-bundle
     - frankenphp=${FRANKENPHP_PACKAGE_VERSION}
+    - php-zts-cli
+    - php-zts-devel
     - php-zts-embed=${PHP_PACKAGE_VERSION}
+    - php-zts-xdebug
+    - pie-zts
     - tzdata
+  files:
+    - url: https://getcomposer.org/download/latest-stable/composer.phar
+      checksum: sha256:${COMPOSER_CHECKSUM}
+      path: /usr/local/bin/composer
+      mode: "0755"
 
 accounts:
-  run-as: frankenphp
+  root: true
+  run-as: root
   users:
     - name: frankenphp
       uid: 65532
@@ -55,8 +70,8 @@ accounts:
 os-release:
   name: Docker Hardened Images (Alpine)
   id: alpine
-  version-id: "3.23"
-  pretty-name: Docker Hardened Images/Alpine Linux v3.23
+  version-id: "3.24"
+  pretty-name: Docker Hardened Images/Alpine Linux v3.24
   home-url: https://docker.com/products/hardened-images/
   bug-report-url: https://docker.com/support/
 

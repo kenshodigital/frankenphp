@@ -43,23 +43,31 @@ jobs:
       packages: write
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 6
       matrix:
         definition:
           - 1-php8.2-alpine3.23
           - 1-php8.2-alpine3.23-dev
+          - 1-php8.2-alpine3.24
+          - 1-php8.2-alpine3.24-dev
           - 1-php8.2-debian13
           - 1-php8.2-debian13-dev
           - 1-php8.3-alpine3.23
           - 1-php8.3-alpine3.23-dev
+          - 1-php8.3-alpine3.24
+          - 1-php8.3-alpine3.24-dev
           - 1-php8.3-debian13
           - 1-php8.3-debian13-dev
           - 1-php8.4-alpine3.23
           - 1-php8.4-alpine3.23-dev
+          - 1-php8.4-alpine3.24
+          - 1-php8.4-alpine3.24-dev
           - 1-php8.4-debian13
           - 1-php8.4-debian13-dev
           - 1-php8.5-alpine3.23
           - 1-php8.5-alpine3.23-dev
+          - 1-php8.5-alpine3.24
+          - 1-php8.5-alpine3.24-dev
           - 1-php8.5-debian13
           - 1-php8.5-debian13-dev
     steps:
