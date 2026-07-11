@@ -22,12 +22,12 @@ platforms:
   - linux/arm64
 
 dates:
-  release: 2026-07-03
+  release: 2026-07-10
 
 vars:
-  RELEASE_DATE: 2026-07-03
-  FRANKENPHP_PACKAGE_VERSION: 1.12.4+php85-1
-  PHP_PACKAGE_VERSION: 8.5.8-1
+  RELEASE_DATE: 2026-07-10
+  FRANKENPHP_PACKAGE_VERSION: 1.12.4+php85-2
+  PHP_PACKAGE_VERSION: 8.5.8-2
 
 contents:
   repositories:
@@ -86,9 +86,9 @@ contents:
     - "!zlib1g"
     - base-files
     - ca-certificates
-    - frankenphp=1.12.4+php85-1
+    - frankenphp=1.12.4+php85-2
     - libc6
-    - php-zts-embed=8.5.8-1
+    - php-zts-embed=8.5.8-2
     - tzdata
 
 accounts:
