@@ -8,19 +8,19 @@ tags:
   - 1-php8.4.23-alpine3.23
   - 1.12-php8.4-alpine3.23
   - 1.12-php8.4.23-alpine3.23
-  - 1.12.4-php8.4-alpine3.23
-  - 1.12.4-php8.4.23-alpine3.23
+  - 1.12.5-php8.4-alpine3.23
+  - 1.12.5-php8.4.23-alpine3.23
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-07-03
+  release: 2026-07-20
 
 vars:
-  RELEASE_DATE: 2026-07-03
-  FRANKENPHP_PACKAGE_VERSION: 1.12.4p84-r0
+  RELEASE_DATE: 2026-07-20
+  FRANKENPHP_PACKAGE_VERSION: 1.12.5p84-r0
   PHP_PACKAGE_VERSION: 8.4.23-r0
 
 contents:
@@ -36,7 +36,7 @@ contents:
     - alpine-baselayout-data
     - busybox
     - ca-certificates-bundle
-    - frankenphp=1.12.4p84-r0
+    - frankenphp=1.12.5p84-r0
     - php-zts-embed=8.4.23-r0
     - tzdata
 

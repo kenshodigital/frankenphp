@@ -8,19 +8,19 @@ tags:
   - 1-php8.2.32-alpine3.23-dev
   - 1.12-php8.2-alpine3.23-dev
   - 1.12-php8.2.32-alpine3.23-dev
-  - 1.12.4-php8.2-alpine3.23-dev
-  - 1.12.4-php8.2.32-alpine3.23-dev
+  - 1.12.5-php8.2-alpine3.23-dev
+  - 1.12.5-php8.2.32-alpine3.23-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-07-03
+  release: 2026-07-20
 
 vars:
-  RELEASE_DATE: 2026-07-03
-  FRANKENPHP_PACKAGE_VERSION: 1.12.4p82-r0
+  RELEASE_DATE: 2026-07-20
+  FRANKENPHP_PACKAGE_VERSION: 1.12.5p82-r0
   PHP_PACKAGE_VERSION: 8.2.32-r0
 
 contents:
@@ -37,7 +37,7 @@ contents:
     - apk-tools
     - busybox
     - ca-certificates-bundle
-    - frankenphp=1.12.4p82-r0
+    - frankenphp=1.12.5p82-r0
     - php-zts-cli
     - php-zts-devel
     - php-zts-embed=8.2.32-r0

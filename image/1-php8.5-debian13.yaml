@@ -12,21 +12,21 @@ tags:
   - 1.12-php8.5-debian13
   - 1.12-php8.5.8-debian
   - 1.12-php8.5.8-debian13
-  - 1.12.4-php8.5-debian
-  - 1.12.4-php8.5-debian13
-  - 1.12.4-php8.5.8-debian
-  - 1.12.4-php8.5.8-debian13
+  - 1.12.5-php8.5-debian
+  - 1.12.5-php8.5-debian13
+  - 1.12.5-php8.5.8-debian
+  - 1.12.5-php8.5.8-debian13
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-07-10
+  release: 2026-07-20
 
 vars:
-  RELEASE_DATE: 2026-07-10
-  FRANKENPHP_PACKAGE_VERSION: 1.12.4+php85-2
+  RELEASE_DATE: 2026-07-20
+  FRANKENPHP_PACKAGE_VERSION: 1.12.5+php85-2
   PHP_PACKAGE_VERSION: 8.5.8-2
 
 contents:
@@ -86,7 +86,7 @@ contents:
     - "!zlib1g"
     - base-files
     - ca-certificates
-    - frankenphp=1.12.4+php85-2
+    - frankenphp=1.12.5+php85-2
     - libc6
     - php-zts-embed=8.5.8-2
     - tzdata
