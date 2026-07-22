@@ -12,21 +12,21 @@ tags:
   - 1.12-php8.2-debian13-dev
   - 1.12-php8.2.32-debian-dev
   - 1.12-php8.2.32-debian13-dev
-  - 1.12.5-php8.2-debian-dev
-  - 1.12.5-php8.2-debian13-dev
-  - 1.12.5-php8.2.32-debian-dev
-  - 1.12.5-php8.2.32-debian13-dev
+  - 1.12.6-php8.2-debian-dev
+  - 1.12.6-php8.2-debian13-dev
+  - 1.12.6-php8.2.32-debian-dev
+  - 1.12.6-php8.2.32-debian13-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-07-20
+  release: 2026-07-22
 
 vars:
-  RELEASE_DATE: 2026-07-20
-  FRANKENPHP_PACKAGE_VERSION: 1.12.5+php82-1
+  RELEASE_DATE: 2026-07-22
+  FRANKENPHP_PACKAGE_VERSION: 1.12.6+php82-1
   PHP_PACKAGE_VERSION: 8.2.32-1
 
 contents:
@@ -49,8 +49,8 @@ contents:
     - diffutils
     - dpkg
     - findutils
-    - frankenphp=1.12.5+php82-1
-    - frankenphp-debuginfo=1.12.5+php82-1
+    - frankenphp=1.12.6+php82-1
+    - frankenphp-debuginfo=1.12.6+php82-1
     - gnu-which
     - grep
     - gzip
