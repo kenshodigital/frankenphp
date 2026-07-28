@@ -41,10 +41,11 @@ contents:
     - apk-tools
     - busybox
     - ca-certificates-bundle
-    - frankenphp=${FRANKENPHP_PACKAGE_VERSION}
+    - frankenphp
+    - libgcc
     - php-zts-cli
     - php-zts-devel
-    - php-zts-embed=${PHP_PACKAGE_VERSION}
+    - php-zts-embed
     - php-zts-xdebug
     - pie-zts
     - tzdata

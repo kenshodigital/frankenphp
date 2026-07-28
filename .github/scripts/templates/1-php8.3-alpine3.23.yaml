@@ -36,8 +36,9 @@ contents:
     - alpine-baselayout-data
     - busybox
     - ca-certificates-bundle
-    - frankenphp=${FRANKENPHP_PACKAGE_VERSION}
-    - php-zts-embed=${PHP_PACKAGE_VERSION}
+    - frankenphp
+    - libgcc
+    - php-zts-embed
     - tzdata
 
 accounts:

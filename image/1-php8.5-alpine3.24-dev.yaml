@@ -12,22 +12,22 @@ tags:
   - 1.12-php8.5-alpine3.24-dev
   - 1.12-php8.5.8-alpine-dev
   - 1.12-php8.5.8-alpine3.24-dev
-  - 1.12.5-php8.5-alpine-dev
-  - 1.12.5-php8.5-alpine3.24-dev
-  - 1.12.5-php8.5.8-alpine-dev
-  - 1.12.5-php8.5.8-alpine3.24-dev
+  - 1.12.6-php8.5-alpine-dev
+  - 1.12.6-php8.5-alpine3.24-dev
+  - 1.12.6-php8.5.8-alpine-dev
+  - 1.12.6-php8.5.8-alpine3.24-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-07-20
+  release: 2026-07-21
 
 vars:
-  RELEASE_DATE: 2026-07-20
-  FRANKENPHP_PACKAGE_VERSION: 1.12.5p85-r0
-  PHP_PACKAGE_VERSION: 8.5.8-r0
+  RELEASE_DATE: 2026-07-21
+  FRANKENPHP_PACKAGE_VERSION: 1.12.6p85
+  PHP_PACKAGE_VERSION: 8.5.8
 
 contents:
   repositories:
@@ -41,10 +41,11 @@ contents:
     - apk-tools
     - busybox
     - ca-certificates-bundle
-    - frankenphp=1.12.5p85-r0
+    - frankenphp
+    - libgcc
     - php-zts-cli
     - php-zts-devel
-    - php-zts-embed=8.5.8-r0
+    - php-zts-embed
     - php-zts-xdebug
     - pie-zts
     - tzdata
