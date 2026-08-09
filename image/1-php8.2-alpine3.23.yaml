@@ -8,19 +8,19 @@ tags:
   - 1-php8.2.32-alpine3.23
   - 1.12-php8.2-alpine3.23
   - 1.12-php8.2.32-alpine3.23
-  - 1.12.6-php8.2-alpine3.23
-  - 1.12.6-php8.2.32-alpine3.23
+  - 1.12.7-php8.2-alpine3.23
+  - 1.12.7-php8.2.32-alpine3.23
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-07-21
+  release: 2026-08-08
 
 vars:
-  RELEASE_DATE: 2026-07-21
-  FRANKENPHP_PACKAGE_VERSION: 1.12.6p82
+  RELEASE_DATE: 2026-08-08
+  FRANKENPHP_PACKAGE_VERSION: 1.12.7p82-r0
   PHP_PACKAGE_VERSION: 8.2.32
 
 contents:
