@@ -5,11 +5,11 @@ image: ghcr.io/kenshodigital/frankenphp
 variant: dev
 tags:
   - 1-php8.4-alpine3.23-dev
-  - 1-php8.4.23-alpine3.23-dev
+  - 1-php8.4.24-alpine3.23-dev
   - 1.12-php8.4-alpine3.23-dev
-  - 1.12-php8.4.23-alpine3.23-dev
+  - 1.12-php8.4.24-alpine3.23-dev
   - 1.12.7-php8.4-alpine3.23-dev
-  - 1.12.7-php8.4.23-alpine3.23-dev
+  - 1.12.7-php8.4.24-alpine3.23-dev
 
 platforms:
   - linux/amd64
@@ -21,7 +21,7 @@ dates:
 vars:
   RELEASE_DATE: 2026-08-08
   FRANKENPHP_PACKAGE_VERSION: 1.12.7p84-r0
-  PHP_PACKAGE_VERSION: 8.4.23
+  PHP_PACKAGE_VERSION: 8.4.24-r0
 
 contents:
   repositories:

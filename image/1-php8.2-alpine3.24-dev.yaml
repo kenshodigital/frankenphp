@@ -6,16 +6,16 @@ variant: dev
 tags:
   - 1-php8.2-alpine-dev
   - 1-php8.2-alpine3.24-dev
-  - 1-php8.2.32-alpine-dev
-  - 1-php8.2.32-alpine3.24-dev
+  - 1-php8.2.33-alpine-dev
+  - 1-php8.2.33-alpine3.24-dev
   - 1.12-php8.2-alpine-dev
   - 1.12-php8.2-alpine3.24-dev
-  - 1.12-php8.2.32-alpine-dev
-  - 1.12-php8.2.32-alpine3.24-dev
+  - 1.12-php8.2.33-alpine-dev
+  - 1.12-php8.2.33-alpine3.24-dev
   - 1.12.7-php8.2-alpine-dev
   - 1.12.7-php8.2-alpine3.24-dev
-  - 1.12.7-php8.2.32-alpine-dev
-  - 1.12.7-php8.2.32-alpine3.24-dev
+  - 1.12.7-php8.2.33-alpine-dev
+  - 1.12.7-php8.2.33-alpine3.24-dev
 
 platforms:
   - linux/amd64
@@ -27,7 +27,7 @@ dates:
 vars:
   RELEASE_DATE: 2026-08-08
   FRANKENPHP_PACKAGE_VERSION: 1.12.7p82-r0
-  PHP_PACKAGE_VERSION: 8.2.32
+  PHP_PACKAGE_VERSION: 8.2.33-r0
 
 contents:
   repositories:
