@@ -5,23 +5,23 @@ image: ghcr.io/kenshodigital/frankenphp
 variant: runtime
 tags:
   - 1-php8.3-alpine3.23
-  - 1-php8.3.35-alpine3.23
-  - 1.12-php8.3-alpine3.23
-  - 1.12-php8.3.35-alpine3.23
-  - 1.12.7-php8.3-alpine3.23
-  - 1.12.7-php8.3.35-alpine3.23
+  - 1-php8.3.33-alpine3.23
+  - 1.13-php8.3-alpine3.23
+  - 1.13-php8.3.33-alpine3.23
+  - 1.13.0-php8.3-alpine3.23
+  - 1.13.0-php8.3.33-alpine3.23
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-09-27
+  release: 2026-10-05
 
 vars:
-  RELEASE_DATE: 2026-09-27
-  FRANKENPHP_PACKAGE_VERSION: 1.12.7p83-r0
-  PHP_PACKAGE_VERSION: 8.3.35-r0
+  RELEASE_DATE: 2026-10-05
+  FRANKENPHP_PACKAGE_VERSION: 1.13.0p83-r0
+  PHP_PACKAGE_VERSION: 8.3.33-r1
 
 contents:
   repositories:

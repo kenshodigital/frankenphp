@@ -8,25 +8,25 @@ tags:
   - 1-php8.5-alpine3.24-dev
   - 1-php8.5.11-alpine-dev
   - 1-php8.5.11-alpine3.24-dev
-  - 1.12-php8.5-alpine-dev
-  - 1.12-php8.5-alpine3.24-dev
-  - 1.12-php8.5.11-alpine-dev
-  - 1.12-php8.5.11-alpine3.24-dev
-  - 1.12.7-php8.5-alpine-dev
-  - 1.12.7-php8.5-alpine3.24-dev
-  - 1.12.7-php8.5.11-alpine-dev
-  - 1.12.7-php8.5.11-alpine3.24-dev
+  - 1.13-php8.5-alpine-dev
+  - 1.13-php8.5-alpine3.24-dev
+  - 1.13-php8.5.11-alpine-dev
+  - 1.13-php8.5.11-alpine3.24-dev
+  - 1.13.0-php8.5-alpine-dev
+  - 1.13.0-php8.5-alpine3.24-dev
+  - 1.13.0-php8.5.11-alpine-dev
+  - 1.13.0-php8.5.11-alpine3.24-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-09-25
+  release: 2026-10-05
 
 vars:
-  RELEASE_DATE: 2026-09-25
-  FRANKENPHP_PACKAGE_VERSION: 1.12.7p85-r0
+  RELEASE_DATE: 2026-10-05
+  FRANKENPHP_PACKAGE_VERSION: 1.13.0p85-r0
   PHP_PACKAGE_VERSION: 8.5.11-r0
 
 contents:
