@@ -6,28 +6,28 @@ variant: runtime
 tags:
   - 1-php8.3-alpine
   - 1-php8.3-alpine3.24
-  - 1-php8.3.33-alpine
-  - 1-php8.3.33-alpine3.24
+  - 1-php8.3.36-alpine
+  - 1-php8.3.36-alpine3.24
   - 1.13-php8.3-alpine
   - 1.13-php8.3-alpine3.24
-  - 1.13-php8.3.33-alpine
-  - 1.13-php8.3.33-alpine3.24
+  - 1.13-php8.3.36-alpine
+  - 1.13-php8.3.36-alpine3.24
   - 1.13.1-php8.3-alpine
   - 1.13.1-php8.3-alpine3.24
-  - 1.13.1-php8.3.33-alpine
-  - 1.13.1-php8.3.33-alpine3.24
+  - 1.13.1-php8.3.36-alpine
+  - 1.13.1-php8.3.36-alpine3.24
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-10-17
+  release: 2026-10-21
 
 vars:
-  RELEASE_DATE: 2026-10-17
+  RELEASE_DATE: 2026-10-21
   FRANKENPHP_PACKAGE_VERSION: 1.13.1p83.35_p0-r0
-  PHP_PACKAGE_VERSION: 8.3.33-r1
+  PHP_PACKAGE_VERSION: 8.3.36-r0
 
 contents:
   repositories:
