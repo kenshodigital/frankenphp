@@ -8,19 +8,19 @@ tags:
   - 1-php8.3.36-alpine3.23
   - 1.13-php8.3-alpine3.23
   - 1.13-php8.3.36-alpine3.23
-  - 1.13.3-php8.3-alpine3.23
-  - 1.13.3-php8.3.36-alpine3.23
+  - 1.13.4-php8.3-alpine3.23
+  - 1.13.4-php8.3.36-alpine3.23
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-10-24
+  release: 2026-10-27
 
 vars:
-  RELEASE_DATE: 2026-10-24
-  FRANKENPHP_PACKAGE_VERSION: 1.13.3p83.36-r0
+  RELEASE_DATE: 2026-10-27
+  FRANKENPHP_PACKAGE_VERSION: 1.13.4p83.36-r0
   PHP_PACKAGE_VERSION: 8.3.36-r0
 
 contents:
