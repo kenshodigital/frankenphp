@@ -51,7 +51,7 @@ contents:
     - tzdata
   files:
     - url: https://getcomposer.org/download/latest-stable/composer.phar
-      checksum: sha256:9674f12a2a181100d889ebfd0b4510805b3e94cea57869b14b383753d602599b
+      checksum: sha256:6f1b891e1d4927d62740276c540fb490e47689e19e102c49e8da849794882f8c
       path: /usr/local/bin/composer
       mode: "0755"
 
