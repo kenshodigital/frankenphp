@@ -5,39 +5,21 @@ IFS=$'\n\t'
 # Checks if a given package is available
 # on a given platform for a given version.
 check_platforms() {
-  case "${2}" in
-    alpine)
-      curl --fail --silent \
-        "https://pkg.henderkes.com/api/packages/${1}/alpine/main/php-zts/x86_64/APKINDEX.tar.gz" \
-        | gzip --decompress \
-        | tar -xO 2>/dev/null \
-        | strings \
-        | grep --after-context=1 "^P:${3}$" \
-        | grep --fixed-strings --line-regexp --quiet "V:${4}" \
-      && \
-      curl --fail --silent \
-        "https://pkg.henderkes.com/api/packages/${1}/alpine/main/php-zts/aarch64/APKINDEX.tar.gz" \
-        | gzip --decompress \
-        | tar -xO 2>/dev/null \
-        | strings \
-        | grep --after-context=1 "^P:${3}$" \
-        | grep --fixed-strings --line-regexp --quiet "V:${4}"
-      ;;
-    debian)
-      curl --fail --silent \
-        "https://pkg.henderkes.com/api/packages/${1}/debian/dists/php-zts/main/binary-amd64/Packages" \
-        | grep --after-context=1 "^Package: ${3}$" \
-        | grep --fixed-strings --line-regexp --quiet "Version: ${4}" \
-      && \
-      curl --fail --silent \
-        "https://pkg.henderkes.com/api/packages/${1}/debian/dists/php-zts/main/binary-arm64/Packages" \
-        | grep --after-context=1 "^Package: ${3}$" \
-        | grep --fixed-strings --line-regexp --quiet "Version: ${4}"
-      ;;
-    *)
-      exit 1
-      ;;
-  esac
+  curl --fail --silent \
+    "https://pkg.henderkes.com/api/packages/${1}/alpine/main/php-zts/x86_64/APKINDEX.tar.gz" \
+    | gzip --decompress \
+    | tar -xO 2>/dev/null \
+    | strings \
+    | grep --after-context=1 "^P:${3}$" \
+    | grep --fixed-strings --line-regexp --quiet "V:${4}" \
+  && \
+  curl --fail --silent \
+    "https://pkg.henderkes.com/api/packages/${1}/alpine/main/php-zts/aarch64/APKINDEX.tar.gz" \
+    | gzip --decompress \
+    | tar -xO 2>/dev/null \
+    | strings \
+    | grep --after-context=1 "^P:${3}$" \
+    | grep --fixed-strings --line-regexp --quiet "V:${4}"
 }
 
 # Calculates composer checksum.
@@ -58,36 +40,18 @@ for template in .github/scripts/templates/*.yaml; do
   base="${BASH_REMATCH[3]}"
 
   # Fetches keyfile for package repository.
-  case "${base}" in
-    alpine)
-      KEYFILE="$(
-        curl \
-          --clobber \
-          --fail \
-          --output-dir 'key/alpine' \
-          --remote-header-name \
-          --remote-name \
-          --silent \
-          --write-out '%{filename_effective}' \
-          "https://pkg.henderkes.com/api/packages/${php_version}/alpine/key" \
-          | sed 's|^key/alpine/||'
-      )"
-      ;;
-    debian)
-      KEYFILE="$(
-        curl \
-          --fail \
-          --output "key/debian/static-php${php_version}.asc" \
-          --silent \
-          --write-out '%{filename_effective}' \
-          "https://pkg.henderkes.com/api/packages/${php_version}/debian/repository.key" \
-          | sed 's|^key/debian/||'
-      )"
-      ;;
-    *)
-      exit 1
-      ;;
-  esac
+  KEYFILE="$(
+    curl \
+      --clobber \
+      --fail \
+      --output-dir 'key/alpine' \
+      --remote-header-name \
+      --remote-name \
+      --silent \
+      --write-out '%{filename_effective}' \
+      "https://pkg.henderkes.com/api/packages/${php_version}/alpine/key" \
+      | sed 's|^key/alpine/||'
+  )"
 
   # Gets previous versions from existing definition.
   RELEASE_DATE="$(
@@ -122,7 +86,7 @@ for template in .github/scripts/templates/*.yaml; do
 
   # Checks if latest FrankenPHP version is available for
   # all platforms. Falls back on previous version otherwise.
-  if check_platforms "${php_version}" "${base}" 'frankenphp' "${frankenphp_package_version_latest}"; then
+  if check_platforms "${php_version}" 'frankenphp' "${frankenphp_package_version_latest}"; then
 
     FRANKENPHP_PACKAGE_VERSION="${frankenphp_package_version_latest}"
 
@@ -153,7 +117,7 @@ for template in .github/scripts/templates/*.yaml; do
 
   # Checks if latest PHP version is available for all
   # platforms. Falls back on previous version otherwise.
-  if check_platforms "${php_version}" "${base}" 'php-zts-embed' "${php_package_version_latest}"; then
+  if check_platforms "${php_version}" 'php-zts-embed' "${php_package_version_latest}"; then
 
     PHP_PACKAGE_VERSION="${php_package_version_latest}"
 
