@@ -1,31 +1,14 @@
 name: Build
+run-name: Build ${{ github.ref_name }}
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - update
-    branches:
-      - main
-    types:
-      - completed
-
-concurrency:
-  group: build
-  cancel-in-progress: false
-
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    strategy:
-      fail-fast: false
-      max-parallel: 6
-      matrix:
-        definition:
+    inputs:
+      definition:
+        description: Definition
+        required: true
+        type: choice
+        options:
           - 1-php8.2-alpine3.24
           - 1-php8.2-alpine3.24-dev
           - 1-php8.3-alpine3.24
@@ -34,47 +17,51 @@ jobs:
           - 1-php8.4-alpine3.24-dev
           - 1-php8.5-alpine3.24
           - 1-php8.5-alpine3.24-dev
+
+jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      tags: ${{ steps.tags.outputs.result }}
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v7
         with:
-          ref: main
+          ref: ${{ github.ref_name }}
 
       - name: Get tags from definition
         id: tags
         uses: mikefarah/yq@master
         with:
-          cmd: yq '.image as $image | .tags[] | "\($image):\(.)"' "./image/${{ matrix.definition }}.yaml"
+          cmd: yq '.tags[] | "\(.)"' "image/${{ inputs.definition }}.yaml"
 
-      - name: Log in to DHI
-        uses: docker/login-action@v4
-        with:
-          registry: dhi.io
+  build:
+    uses: docker/github-builder/.github/workflows/build.yml@v1
+    needs:
+      - prepare
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    with:
+      file: image/${{ inputs.definition }}.yaml
+      meta-images: ghcr.io/${{ github.repository }}
+      meta-tags: ${{ needs.prepare.outputs.tags }}
+      output: image
+      platforms: |
+        linux/amd64
+        linux/arm64
+      push: true
+      sbom: true
+      sign: true
+    secrets:
+      registry-auths: |
+        - registry: dhi.io
           username: ${{ secrets.DOCKER_ACTOR }}
           password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Log in to GHCR
-        uses: docker/login-action@v4
-        with:
-          registry: ghcr.io
+        - registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4
-        with:
-          cache-image: false
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
-
-      - name: Build and push image
-        uses: docker/build-push-action@v7
-        with:
-          context: .
-          file: image/${{ matrix.definition }}.yaml
-          platforms: linux/amd64,linux/arm64
-          sbom: true
-          push: true
-          provenance: mode=max
-          tags: ${{ steps.tags.outputs.result }}
