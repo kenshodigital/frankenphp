@@ -4,58 +4,131 @@ name: FrankenPHP
 image: ghcr.io/kenshodigital/frankenphp
 variant: runtime
 tags:
+  - 1-php8.3
   - 1-php8.3-alpine
   - 1-php8.3-alpine3.24
+  - 1-php8.3.36
   - 1-php8.3.36-alpine
   - 1-php8.3.36-alpine3.24
+  - 1.13-php8.3
   - 1.13-php8.3-alpine
   - 1.13-php8.3-alpine3.24
+  - 1.13-php8.3.36
   - 1.13-php8.3.36-alpine
   - 1.13-php8.3.36-alpine3.24
-  - 1.13.4-php8.3-alpine
-  - 1.13.4-php8.3-alpine3.24
-  - 1.13.4-php8.3.36-alpine
-  - 1.13.4-php8.3.36-alpine3.24
+  - 1.13.5-php8.3
+  - 1.13.5-php8.3-alpine
+  - 1.13.5-php8.3-alpine3.24
+  - 1.13.5-php8.3.36
+  - 1.13.5-php8.3.36-alpine
+  - 1.13.5-php8.3.36-alpine3.24
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-10-27
+  release: 2026-11-05
 
 vars:
-  RELEASE_DATE: 2026-10-27
-  FRANKENPHP_PACKAGE_VERSION: 1.13.4p83.36-r0
-  PHP_PACKAGE_VERSION: 8.3.36-r0
+  RELEASE_DATE: 2026-11-05
+  FRANKENPHP_VERSION: 1.13.5
+  PHP_VERSION: 8.3.36
 
 contents:
   repositories:
     - https://dhi.io/apk/alpine/v3.24/main
-    - https://pkg.henderkes.com/api/packages/83/alpine/main/php-zts
   keyring:
     - https://dhi.io/keyring/dhi-apk@docker-0F81AD7700D99184.rsa.pub
-    - https://github.com/kenshodigital/frankenphp/raw/refs/heads/main/key/alpine/83@67364930c023d23fdf87f9acd7a006ec4f2f5d8af9c0c48843be4a8c4127ebd4.rsa.pub
   packages:
     - alpine-baselayout-data
-    - busybox
     - ca-certificates-bundle
-    - frankenphp
-    - libgcc
-    - php-zts-embed
     - tzdata
+  files:
+    - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.3.36/php.ini-production
+      path: /usr/local/etc/php/php.ini
+      mode: "0755"
+    - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.13.5/package/content/index.php
+      path: /srv/public/index.php
+      mode: "0755"
+  builds:
+    - name: static-php
+      work-dir: /usr/local/src
+      contents:
+        repositories:
+          - https://dhi.io/apk/alpine/v3.24/main
+        keyring:
+          - https://dhi.io/keyring/dhi-apk@docker-0F81AD7700D99184.rsa.pub
+        packages:
+          - alpine-baselayout-data
+          - alpine-release
+          - apk-tools
+          - bash
+          - busybox
+          - ca-certificates-bundle
+          - curl
+      pipeline:
+        - name: download
+          privileged: true
+          runs: |
+            arch="$(uname -m)"
+            [[ "${arch}" == 'arm64' ]] && arch='aarch64'
+
+            curl \
+            --fail \
+            --location \
+            --output '/usr/local/bin/spc' \
+            --silent \
+            "https://dl.static-php.dev/v3/spc-bin/nightly/spc-linux-${arch}"
+
+            chmod +x /usr/local/bin/spc
+        - name: setup
+          privileged: true
+          secrets:
+            - id: GIT_AUTH_TOKEN
+              env: GITHUB_TOKEN
+          runs: |
+            apk update
+            spc doctor --auto-fix
+            spc install-pkg upx
+        - name: build
+          privileged: true
+          secrets:
+            - id: GIT_AUTH_TOKEN
+              env: GITHUB_TOKEN
+          runs: |
+            spc doctor
+            spc build:frankenphp \
+              "brotli,ctype,curl,dom,fileinfo,filter,iconv,intl,libxml,mbregex,mbstring,opcache,openssl,password-argon2,pdo,pdo_sqlite,session,simplexml,sodium,tokenizer,xml,zlib,zstd" \
+              --dl-custom-git=frankenphp:v1.13.5:https://github.com/php/frankenphp \
+              --dl-custom-git=php-src:php-8.3.36:https://github.com/php/php-src \
+              --dl-parallel=10 \
+              --dl-prefer-binary \
+              --dl-retry=5 \
+              --dl-with-php=8.3 \
+              --enable-zts \
+              --with-libs="nghttp2,nghttp3,ngtcp2" \
+              --with-upx-pack
+      paths:
+        - type: directory
+          path: /usr/local/bin
+        - type: directory
+          path: /usr/local/src
+      outputs:
+        - source: /usr/local/src/buildroot/bin/frankenphp
+          target: /usr/local/bin/frankenphp
 
 accounts:
-  run-as: frankenphp
+  run-as: nonroot
   users:
-    - name: frankenphp
+    - name: nonroot
       uid: 65532
       gid: 65532
   groups:
-    - name: frankenphp
+    - name: nonroot
       gid: 65532
       members:
-        - frankenphp
+        - nonroot
 
 os-release:
   name: Docker Hardened Images (Alpine)
@@ -74,7 +147,8 @@ environment:
 
 paths:
   - type: file
-    path: /etc/frankenphp/Caddyfile
+    path: /usr/local/etc/frankenphp/Caddyfile
+    mode: "0755"
     content: |
       {
       	skip_install_trust
@@ -85,22 +159,20 @@ paths:
       	php_server
       }
   - type: directory
-    path: /srv/public
-  - type: symlink
-    path: /srv/public/index.php
-    source: /usr/share/frankenphp/index.php
+    path: /usr/local/etc/php/conf.d
+    mode: "0755"
 
 annotations:
   org.opencontainers.image.description: A minimal FrankenPHP image
   org.opencontainers.image.licenses: MIT
 
 entrypoint:
-  - /usr/bin/frankenphp
+  - /usr/local/bin/frankenphp
 
 cmd:
   - run
   - --config
-  - /etc/frankenphp/Caddyfile
+  - /usr/local/etc/frankenphp/Caddyfile
 
 ports:
   - 8080/tcp
