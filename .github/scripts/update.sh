@@ -105,15 +105,15 @@ for template in .github/scripts/templates/*.yaml; do
   # repository and dispatches build.
   if [[ "${CI:-}" == "true" ]]; then
 
+    # Prepares tag.
+    tag="${FRANKENPHP_VERSION}-php${PHP_VERSION}-${base}"
+
     # Checks for changes.
     if [[ -n "$(git status --porcelain)" ]]; then
 
       # Commits changes.
       git add image
       git commit -m "Updates definition ${definition}"
-
-      # Prepares tag.
-      tag="${FRANKENPHP_VERSION}-php${PHP_VERSION}-${base}"
 
       # Pushes changes. Rebases, waits and
       # retries three times on conflict.
