@@ -101,35 +101,38 @@ for template in .github/scripts/templates/*.yaml; do
     < "${template}" \
     > "image/${definition}.yaml"
 
-
   # Checks for changes, updates
   # repository and dispatches build.
-  if [[ "${CI:-}" == "true" && -n "$(git status --porcelain)" ]]; then
+  if [[ "${CI:-}" == "true" ]]; then
 
-    # Commits changes.
-    git add image
-    git commit -m "Updates definition ${definition}"
+    # Checks for changes.
+    if [[ -n "$(git status --porcelain)" ]]; then
 
-    # Prepares tag.
-    tag="${FRANKENPHP_VERSION}-php${PHP_VERSION}-${base}"
+      # Commits changes.
+      git add image
+      git commit -m "Updates definition ${definition}"
 
-    # Pushes changes. Rebases, waits and
-    # retries three times on conflict.
-    for _ in 1 2 3; do
-      if git push; then
+      # Prepares tag.
+      tag="${FRANKENPHP_VERSION}-php${PHP_VERSION}-${base}"
 
-        # Adds or updates tag.
-        git tag -f "${tag}"
-        git push -f --tags
+      # Pushes changes. Rebases, waits and
+      # retries three times on conflict.
+      for _ in 1 2 3; do
+        if git push; then
 
-        # Dispatches build.
-        gh workflow run build.yaml \
-          --field definition="${definition}" \
-          --ref "${tag}"
-        break;
-      fi
-      git pull --rebase origin main
-      sleep 3
-    done
+          # Adds or updates tag.
+          git tag -f "${tag}"
+          git push -f --tags
+          break;
+        fi
+        git pull --rebase origin main
+        sleep 3
+      done
+    fi
+
+    # Dispatches build.
+    gh workflow run build.yaml \
+      --field definition="${definition}" \
+      --ref "${tag}"
   fi
 done
