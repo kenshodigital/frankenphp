@@ -15,7 +15,7 @@ See all [available tags and versions][eC6unD].
 All examples in this guide use the public images hosted on GitHub’s container registry.
 
 ```shell
-docker pull ghcr.io/kenshodigital/frankenphp:1-php8.5
+docker pull ghcr.io/kenshodigital/frankenphp:1-php8.6
 ```
 
 ### Exposing external ports
@@ -25,7 +25,7 @@ By default, FrankenPHP listens on port `8080` in these images. To expose this po
 ```shell
 docker run \
   --publish 8080:8080 \
-  ghcr.io/kenshodigital/frankenphp:1-php8.5
+  ghcr.io/kenshodigital/frankenphp:1-php8.6
 ```
 
 ### Hosting a project
@@ -36,13 +36,13 @@ The default document root for FrankenPHP is `/srv/public` in these images. To ho
 docker run \
   --publish 8080:8080 \
   --volume ./app:/srv:ro \
-  ghcr.io/kenshodigital/frankenphp:1-php8.5
+  ghcr.io/kenshodigital/frankenphp:1-php8.6
 ```
 
 Alternatively, use a Dockerfile to build a new image that includes your project files.
 
 ```dockerfile
-FROM ghcr.io/kenshodigital/frankenphp:1-php8.5
+FROM ghcr.io/kenshodigital/frankenphp:1-php8.6
 COPY ./app /srv
 ```
 
@@ -63,7 +63,7 @@ docker run \
   --publish 443:443/tcp \
   --publish 443:443/udp \
   --volume ./app:/app:ro \
-  ghcr.io/kenshodigital/frankenphp:1-php8.5
+  ghcr.io/kenshodigital/frankenphp:1-php8.6
 ```
 
 #### Using a custom Caddyfile
@@ -87,13 +87,13 @@ docker run \
   --publish 443:443/udp \
   --volume ./Caddyfile:/usr/local/etc/frankenphp/Caddyfile:ro \
   --volume ./app:/app:ro \
-  ghcr.io/kenshodigital/frankenphp:1-php8.5
+  ghcr.io/kenshodigital/frankenphp:1-php8.6
 ```
 
 Alternatively, build a new image that includes your custom configuration.
 
 ```dockerfile
-FROM ghcr.io/kenshodigital/frankenphp:1-php8.5
+FROM ghcr.io/kenshodigital/frankenphp:1-php8.6
 COPY ./Caddyfile /usr/local/etc/frankenphp/Caddyfile
 COPY ./app /app
 ```
@@ -110,7 +110,7 @@ docker run \
   --read-only \
   --tmpfs /tmp \
   --volume home:/home/nonroot \
-  ghcr.io/kenshodigital/frankenphp:1-php8.5
+  ghcr.io/kenshodigital/frankenphp:1-php8.6
 ```
 
 ### Using dev variants
@@ -194,12 +194,12 @@ Then build your custom image with a standard `docker buildx build` command.
 
 ```shell
 docker buildx build . \
-  --file image/1-php8.5-alpine3.24.yaml \
+  --file image/1-php8.6-alpine3.24.yaml \
   --load \
   --provenance=1 \
   --sbom=generator=dhi.io/scout-sbom-indexer:1 \
   --secret id=GIT_AUTH_TOKEN,env=GITHUB_TOKEN \
-  --tag frankenphp:1-php8.5
+  --tag frankenphp:1-php8.6
 ```
 
 If you’re forking this repository and using the GitHub Actions workflows, you only have to pass the `DOCKER_ACTOR` and `DOCKER_TOKEN` secrets to the build workflow.
