@@ -7,33 +7,33 @@ tags:
   - 1-php8.6-dev
   - 1-php8.6-alpine-dev
   - 1-php8.6-alpine3.24-dev
-  - 1-php8.6.0RC7-dev
-  - 1-php8.6.0RC7-alpine-dev
-  - 1-php8.6.0RC7-alpine3.24-dev
+  - 1-php8.6.0-dev
+  - 1-php8.6.0-alpine-dev
+  - 1-php8.6.0-alpine3.24-dev
   - 1.13-php8.6-dev
   - 1.13-php8.6-alpine-dev
   - 1.13-php8.6-alpine3.24-dev
-  - 1.13-php8.6.0RC7-dev
-  - 1.13-php8.6.0RC7-alpine-dev
-  - 1.13-php8.6.0RC7-alpine3.24-dev
+  - 1.13-php8.6.0-dev
+  - 1.13-php8.6.0-alpine-dev
+  - 1.13-php8.6.0-alpine3.24-dev
   - 1.13.5-php8.6-dev
   - 1.13.5-php8.6-alpine-dev
   - 1.13.5-php8.6-alpine3.24-dev
-  - 1.13.5-php8.6.0RC7-dev
-  - 1.13.5-php8.6.0RC7-alpine-dev
-  - 1.13.5-php8.6.0RC7-alpine3.24-dev
+  - 1.13.5-php8.6.0-dev
+  - 1.13.5-php8.6.0-alpine-dev
+  - 1.13.5-php8.6.0-alpine3.24-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-11-10
+  release: 2026-11-19
 
 vars:
-  RELEASE_DATE: 2026-11-12
+  RELEASE_DATE: 2026-11-19
   FRANKENPHP_VERSION: 1.13.5
-  PHP_VERSION: 8.6.0RC7
+  PHP_VERSION: 8.6.0
   COMPOSER_VERSION: 2.11.2
 
 contents:
@@ -50,7 +50,7 @@ contents:
     - tzdata
     - 7zip
   files:
-    - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.6.0RC7/php.ini-development
+    - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.6.0/php.ini-development
       path: /usr/local/etc/php/php.ini
       mode: "0755"
     - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.13.5/package/content/index.php
@@ -123,9 +123,9 @@ contents:
               --build-embed \
               --build-frankenphp \
               --build-shared=xdebug \
-              --dl-custom-git=frankenphp:v1.13.5:https://github.com/php/frankenphp \
-              --dl-custom-git=php-src:php-8.6.0RC7:https://github.com/php/php-src \
               --dl-custom-git=ext-xdebug:3.6.0alpha1:https://github.com/xdebug/xdebug \
+              --dl-custom-git=frankenphp:v1.13.5:https://github.com/php/frankenphp \
+              --dl-custom-git=php-src:php-8.6.0:https://github.com/php/php-src \
               --dl-parallel=10 \
               --dl-prefer-binary \
               --dl-retry=5 \

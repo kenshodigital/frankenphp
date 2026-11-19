@@ -7,33 +7,33 @@ tags:
   - 1-php8.6
   - 1-php8.6-alpine
   - 1-php8.6-alpine3.24
-  - 1-php8.6.0RC7
-  - 1-php8.6.0RC7-alpine
-  - 1-php8.6.0RC7-alpine3.24
+  - 1-php8.6.0
+  - 1-php8.6.0-alpine
+  - 1-php8.6.0-alpine3.24
   - 1.13-php8.6
   - 1.13-php8.6-alpine
   - 1.13-php8.6-alpine3.24
-  - 1.13-php8.6.0RC7
-  - 1.13-php8.6.0RC7-alpine
-  - 1.13-php8.6.0RC7-alpine3.24
+  - 1.13-php8.6.0
+  - 1.13-php8.6.0-alpine
+  - 1.13-php8.6.0-alpine3.24
   - 1.13.5-php8.6
   - 1.13.5-php8.6-alpine
   - 1.13.5-php8.6-alpine3.24
-  - 1.13.5-php8.6.0RC7
-  - 1.13.5-php8.6.0RC7-alpine
-  - 1.13.5-php8.6.0RC7-alpine3.24
+  - 1.13.5-php8.6.0
+  - 1.13.5-php8.6.0-alpine
+  - 1.13.5-php8.6.0-alpine3.24
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-11-12
+  release: 2026-11-19
 
 vars:
-  RELEASE_DATE: 2026-11-12
+  RELEASE_DATE: 2026-11-19
   FRANKENPHP_VERSION: 1.13.5
-  PHP_VERSION: 8.6.0RC7
+  PHP_VERSION: 8.6.0
 
 contents:
   repositories:
@@ -45,7 +45,7 @@ contents:
     - ca-certificates-bundle
     - tzdata
   files:
-    - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.6.0RC7/php.ini-production
+    - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.6.0/php.ini-production
       path: /usr/local/etc/php/php.ini
       mode: "0755"
     - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.13.5/package/content/index.php
@@ -101,7 +101,7 @@ contents:
             spc build:frankenphp \
               "brotli,ctype,curl,dom,fileinfo,filter,iconv,intl,libxml,mbregex,mbstring,opcache,openssl,password-argon2,pdo,pdo_sqlite,session,simplexml,sodium,tokenizer,xml,zlib,zstd" \
               --dl-custom-git=frankenphp:v1.13.5:https://github.com/php/frankenphp \
-              --dl-custom-git=php-src:php-8.6.0RC7:https://github.com/php/php-src \
+              --dl-custom-git=php-src:php-8.6.0:https://github.com/php/php-src \
               --dl-parallel=10 \
               --dl-prefer-binary \
               --dl-retry=5 \
