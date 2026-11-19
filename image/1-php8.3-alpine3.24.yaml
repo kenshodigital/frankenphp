@@ -16,12 +16,12 @@ tags:
   - 1.13-php8.3.37
   - 1.13-php8.3.37-alpine
   - 1.13-php8.3.37-alpine3.24
-  - 1.13.5-php8.3
-  - 1.13.5-php8.3-alpine
-  - 1.13.5-php8.3-alpine3.24
-  - 1.13.5-php8.3.37
-  - 1.13.5-php8.3.37-alpine
-  - 1.13.5-php8.3.37-alpine3.24
+  - 1.13.6-php8.3
+  - 1.13.6-php8.3-alpine
+  - 1.13.6-php8.3-alpine3.24
+  - 1.13.6-php8.3.37
+  - 1.13.6-php8.3.37-alpine
+  - 1.13.6-php8.3.37-alpine3.24
 
 platforms:
   - linux/amd64
@@ -32,7 +32,7 @@ dates:
 
 vars:
   RELEASE_DATE: 2026-11-19
-  FRANKENPHP_VERSION: 1.13.5
+  FRANKENPHP_VERSION: 1.13.6
   PHP_VERSION: 8.3.37
 
 contents:
@@ -48,7 +48,7 @@ contents:
     - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.3.37/php.ini-production
       path: /usr/local/etc/php/php.ini
       mode: "0755"
-    - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.13.5/package/content/index.php
+    - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.13.6/package/content/index.php
       path: /srv/public/index.php
       mode: "0755"
   builds:
@@ -100,7 +100,7 @@ contents:
             spc doctor
             spc build:frankenphp \
               "brotli,ctype,curl,dom,fileinfo,filter,iconv,intl,libxml,mbregex,mbstring,opcache,openssl,password-argon2,pdo,pdo_sqlite,session,simplexml,sodium,tokenizer,xml,zlib,zstd" \
-              --dl-custom-git=frankenphp:v1.13.5:https://github.com/php/frankenphp \
+              --dl-custom-git=frankenphp:v1.13.6:https://github.com/php/frankenphp \
               --dl-custom-git=php-src:php-8.3.37:https://github.com/php/php-src \
               --dl-parallel=10 \
               --dl-prefer-binary \
