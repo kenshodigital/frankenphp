@@ -20,45 +20,53 @@ for template in .github/scripts/templates/*.yaml; do
   # Fetches FrankenPHP release info from repository.
   frankenphp_release="$(
     curl --fail --silent \
+      -H "Authorization: Bearer ${GH_TOKEN:-${GITHUB_TOKEN}}" \
       "https://api.github.com/repos/php/frankenphp/releases" \
     | jq \
       --arg prefix "v${frankenphp_version_major}." \
-      '[.[] | select(.tag_name | startswith($prefix)) | select(.prerelease == false and .draft == false)] | first'
+      '[.[] | select(.tag_name | startswith($prefix)) | select(.prerelease == false and .draft == false)] | first // empty'
   )"
+  if [[ -z "${frankenphp_release}" ]]; then
+    continue;
+  fi
 
   # Parses latest FrankenPHP tag from release info.
-  frankenphp_release_tag="$(echo "${frankenphp_release}" | jq --raw-output '.tag_name')"
+  frankenphp_release_tag="$(jq --raw-output '.tag_name' <<< "${frankenphp_release}")"
   [[ "${frankenphp_release_tag}" =~ ^v((([0-9]+)\.[0-9]+)\.[0-9]+)$ ]]
   FRANKENPHP_VERSION="${BASH_REMATCH[1]}"
   FRANKENPHP_VERSION_MAJOR_MINOR="${BASH_REMATCH[2]}"
   FRANKENPHP_VERSION_MAJOR="${BASH_REMATCH[3]}"
 
   # Parses latest FrankenPHP release date from release info.
-  frankenphp_release_published="$(echo "${frankenphp_release}" | jq --raw-output '.published_at')"
-  [[ "${frankenphp_release_published}" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}) ]]
+  frankenphp_release_date="$(jq --raw-output '.published_at' <<< "${frankenphp_release}")"
+  [[ "${frankenphp_release_date}" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}) ]]
   RELEASE_DATE="${BASH_REMATCH[1]}"
 
 
   # Fetches PHP release info from repository.
   php_release="$(
     curl --fail --silent \
-      "https://api.github.com/repos/php/php-src/releases" \
-    | jq \
-      --arg prefix "php-${php_version_major_minor}." \
-      '[.[] | select(.tag_name | startswith($prefix)) | select(.prerelease == false and .draft == false)] | first'
+      "https://www.php.net/releases/?json=1&version=${php_version_major_minor}"
   )"
+  if [[ -z "${php_release}" ]]; then
+    continue
+  fi
+  if [[ -n "$(jq --raw-output '.error // empty' <<< "${php_release}")" ]]; then
+    continue;
+  fi
 
-  # Parses latest PHP tag from release info.
-  php_release_tag="$(echo "${php_release}" | jq --raw-output '.tag_name')"
-  [[ "${php_release_tag}" =~ ^php-(([0-9]+\.[0-9]+)\.[0-9]+)$ ]]
-  PHP_VERSION="${BASH_REMATCH[1]}"
-  PHP_VERSION_MAJOR_MINOR="${BASH_REMATCH[2]}"
+  # Parses latest PHP version from release info.
+  PHP_VERSION="$(jq --raw-output '.version' <<< "${php_release}")"
+  PHP_VERSION_MAJOR_MINOR="${php_version_major_minor}"
 
   # Parses latest PHP release date from release info.
-  php_release_published="$(echo "${php_release}" | jq --raw-output '.published_at')"
-  [[ "${php_release_published}" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}) ]]
-  if [[ "${BASH_REMATCH[1]}" > "${RELEASE_DATE}" ]]; then
-    RELEASE_DATE="${BASH_REMATCH[1]}"
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    php_release_date="$(LC_ALL=C date -j -f "%d %b %Y" "$(jq --raw-output '.date' <<< "${php_release}")" +%Y-%m-%d)"
+  else
+    php_release_date="$(LC_ALL=C date -d "$(jq --raw-output '.date' <<< "${php_release}")" +%Y-%m-%d)"
+  fi
+  if [[ "${php_release_date}" > "${RELEASE_DATE}" ]]; then
+    RELEASE_DATE="${php_release_date}"
   fi
 
 
@@ -66,18 +74,22 @@ for template in .github/scripts/templates/*.yaml; do
   if [[ -n "${dev}" ]]; then
     composer_release="$(
       curl --fail --silent \
+        -H "Authorization: Bearer ${GH_TOKEN:-${GITHUB_TOKEN}}" \
         "https://api.github.com/repos/composer/composer/releases" \
-      | jq '[.[] | select(.prerelease == false and .draft == false)] | first'
+      | jq '[.[] | select(.prerelease == false and .draft == false)] | first // empty'
     )"
+    if [[ -z "${composer_release}" ]]; then
+      continue;
+    fi
 
     # Parses latest Composer tag from release info.
-    composer_release_tag="$(echo "${composer_release}" | jq --raw-output '.tag_name')"
+    composer_release_tag="$(jq --raw-output '.tag_name' <<< "${composer_release}")"
     [[ "${composer_release_tag}" =~ ^([0-9]+\.[0-9]+\.[0-9]+)$ ]]
     COMPOSER_VERSION="${BASH_REMATCH[1]}"
 
     # Parses latest Composer release date from release info.
-    composer_release_published="$(echo "${composer_release}" | jq --raw-output '.published_at')"
-    [[ "${composer_release_published}" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}) ]]
+    composer_release_date="$(jq --raw-output '.published_at' <<< "${composer_release}")"
+    [[ "${composer_release_date}" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}) ]]
     if [[ "${BASH_REMATCH[1]}" > "${RELEASE_DATE}" ]]; then
       RELEASE_DATE="${BASH_REMATCH[1]}"
     fi
