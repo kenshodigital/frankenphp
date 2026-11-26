@@ -10,31 +10,31 @@ tags:
   - 1-php8.5.13-dev
   - 1-php8.5.13-alpine-dev
   - 1-php8.5.13-alpine3.24-dev
-  - 1.13-php8.5-dev
-  - 1.13-php8.5-alpine-dev
-  - 1.13-php8.5-alpine3.24-dev
-  - 1.13-php8.5.13-dev
-  - 1.13-php8.5.13-alpine-dev
-  - 1.13-php8.5.13-alpine3.24-dev
-  - 1.13.6-php8.5-dev
-  - 1.13.6-php8.5-alpine-dev
-  - 1.13.6-php8.5-alpine3.24-dev
-  - 1.13.6-php8.5.13-dev
-  - 1.13.6-php8.5.13-alpine-dev
-  - 1.13.6-php8.5.13-alpine3.24-dev
+  - 1.14-php8.5-dev
+  - 1.14-php8.5-alpine-dev
+  - 1.14-php8.5-alpine3.24-dev
+  - 1.14-php8.5.13-dev
+  - 1.14-php8.5.13-alpine-dev
+  - 1.14-php8.5.13-alpine3.24-dev
+  - 1.14.0-php8.5-dev
+  - 1.14.0-php8.5-alpine-dev
+  - 1.14.0-php8.5-alpine3.24-dev
+  - 1.14.0-php8.5.13-dev
+  - 1.14.0-php8.5.13-alpine-dev
+  - 1.14.0-php8.5.13-alpine3.24-dev
 
 platforms:
   - linux/amd64
   - linux/arm64
 
 dates:
-  release: 2026-11-19
+  release: 2026-11-24
 
 vars:
-  RELEASE_DATE: 2026-11-19
-  FRANKENPHP_VERSION: 1.13.6
+  RELEASE_DATE: 2026-11-24
+  FRANKENPHP_VERSION: 1.14.0
   PHP_VERSION: 8.5.13
-  COMPOSER_VERSION: 2.11.2
+  COMPOSER_VERSION: 2.11.3
 
 contents:
   repositories:
@@ -53,10 +53,10 @@ contents:
     - url: https://raw.githubusercontent.com/php/php-src/refs/tags/php-8.5.13/php.ini-development
       path: /usr/local/etc/php/php.ini
       mode: "0755"
-    - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.13.6/package/content/index.php
+    - url: https://raw.githubusercontent.com/php/frankenphp/refs/tags/v1.14.0/package/content/index.php
       path: /srv/public/index.php
       mode: "0755"
-    - url: https://github.com/composer/composer/releases/download/2.11.2/composer.phar
+    - url: https://github.com/composer/composer/releases/download/2.11.3/composer.phar
       path: /usr/local/bin/composer
       mode: "0755"
     - url: https://composer.github.io/snapshots.pub
@@ -123,7 +123,7 @@ contents:
               --build-embed \
               --build-frankenphp \
               --build-shared=xdebug \
-              --dl-custom-git=frankenphp:v1.13.6:https://github.com/php/frankenphp \
+              --dl-custom-git=frankenphp:v1.14.0:https://github.com/php/frankenphp \
               --dl-custom-git=php-src:php-8.5.13:https://github.com/php/php-src \
               --dl-parallel=10 \
               --dl-prefer-binary \
